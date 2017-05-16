@@ -1,0 +1,65 @@
+Installing and starting Hadoop:
+
+Step 1. Install Java JDK 8 to "C:\Java" (e.g. "C:\Java\jdk1.8.0_111"). The path should not contain whitespaces.
+http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-windows-x64.exe
+
+Step 2. Download and extract Hadoop to "C:" (e.g. "C:\hadoop-2.6.2").
+http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.6.2/hadoop-2.6.2.tar.gz
+
+Step 3. Download Hadoop Common and extract the contents of the "bin" folder over the "bin" folder of the Hadoop installation (e.g. "C:\hadoop-2.6.2\bin").
+https://github.com/amihalik/hadoop-common-2.6.0-bin
+
+Step 4. Create "data" folder inside Hadoop installation (e.g. "C:\hadoop-2.6.2\data"). Create "data" and "name" folders inside this newly created folder (e.g. "C:\hadoop-2.6.2\data\data", "C:\hadoop-2.6.2\data\name").
+
+Step 5. Create "temp" and "userlog" folders inside Hadoop installation (e.g. "C:\hadoop-2.6.2\temp", "C:\hadoop-2.6.2\userlog").
+
+Step 6. Copy/Replace "core-site.xml", "hdfs-site.xml", "mapred.xml" and "yarn.xml" in "etc\hadoop" inside Hadoop installation (e.g. "C:\hadoop-2.6.2\etc\hadoop") with provided files. If Hadoop was not installed in example "C:\hadoop-2.6.2", change the contents of these files accordingly.
+
+Step 7. Add the following variables:
+JAVA_HOME -> C:\Java\jdk1.8.0_111
+HADOOP_HOME -> C:\hadoop-2.6.2
+HADOOP_CLASSPATH -> %JAVA_HOME%\lib\tools.jar
+
+If Java was not installed in example "C:\Java\jdk1.8.0_111", change accordingly.
+If Hadoop was not installed in example "C:\hadoop-2.6.2", change accordingly.
+
+Step 8. Add the following to PATH:
+%JAVA_HOME%\bin
+%HADOOP_HOME%\bin
+%HADOOP_HOME%\sbin
+%HADOOP_HOME%\share\hadoop\common\*
+%HADOOP_HOME%\share\hadoop\hdfs
+%HADOOP_HOME%\share\hadoop\hdfs\lib\*
+%HADOOP_HOME%\share\hadoop\hdfs\*
+%HADOOP_HOME%\share\hadoop\yarn\lib\*
+%HADOOP_HOME%\share\hadoop\yarn\*
+%HADOOP_HOME%\share\hadoop\mapreduce\lib\*
+%HADOOP_HOME%\share\hadoop\mapreduce\*
+%HADOOP_HOME%\share\hadoop\common\lib\*
+
+Step 10. Check "hadoop version" in cmd.
+
+Step 9. Execute "hdfs namenode –format".
+
+Step 10. Start Hadoop using "start-dfs.cmd" and "start-yarn.cmd"
+
+
+
+Running an example (as Administrator):
+
+Step 1. Copy provided example files to Hadoop installation (e.g. "C:\hadoop-2.6.2\Hadoop-WordCount").
+
+Step 3. Make sure Hadoop is running. Navigate to Hadoop-WordCount. Add input file to HDFS by running "hadoop fs -put input.txt /input.txt".
+
+Step 4. Compile and package example with "hadoop com.sun.tools.javac.Main WordCount.java" and "jar cf wc.jar WordCount*.class"
+
+Step 5. Run with "hadoop jar wc.jar WordCount /input.txt /output"
+
+Step 6. Execute "hadoop fs -getmerge /output output.txt"
+
+Step 6. Check results in "output.txt".
+
+
+References: 
+http://www.ics.uci.edu/~shantas/Install_Hadoop-2.6.0_on_Windows10.pdf
+https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
